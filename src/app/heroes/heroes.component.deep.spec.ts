@@ -1,25 +1,15 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { HeroesComponent } from './heroes.component';
-import { NO_ERRORS_SCHEMA, Input, Component } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HeroService } from '../hero.service';
-import { of } from 'rxjs';
-import { Hero } from '../hero';
 import { By } from '@angular/platform-browser';
+import { HeroComponent } from '../hero/hero.component';
+import { of } from 'rxjs';
 
-// tslint:disable-block
-describe('HeroesComponent (shallow tests)', () => {
-/*
+describe('HeroesComponent (deep tests)', () => {
     let fixture: ComponentFixture<HeroesComponent>;
     let mockHeroService;
     let HEROES;
-
-    @Component({
-        selector: 'app-hero',
-        template: '<div></div>'
-    })
-    export class FakeHeroComponent {
-        @Input() hero: Hero;
-    }
 
     beforeEach(() => {
         HEROES = [
@@ -33,28 +23,29 @@ describe('HeroesComponent (shallow tests)', () => {
         TestBed.configureTestingModule({
             declarations: [
                 HeroesComponent,
-                FakeHeroComponent
+                HeroComponent
             ],
             providers: [
                 { provide: HeroService, useValue: mockHeroService }
+            ],
+            schemas: [
+                NO_ERRORS_SCHEMA
             ]
         });
 
         fixture = TestBed.createComponent(HeroesComponent);
     });
 
-    it('should set heroes correctly from the service', () => {
+    it('should render each hero as a HeroComponent', () => {
         mockHeroService.getHeroes.and.returnValue(of(HEROES));
         fixture.detectChanges();
 
-        expect(fixture.componentInstance.heroes.length).toBe(3);
-    });
+        const heroComponentDEs = fixture.debugElement.queryAll(By.directive(HeroComponent));
 
-    it('should create one li for each hero', () => {
-        mockHeroService.getHeroes.and.returnValue(of(HEROES));
-        fixture.detectChanges();
+        expect(heroComponentDEs.length).toEqual(3);
 
-        expect(fixture.debugElement.queryAll(By.css('li')).length).toBe(3);
+        for (let i = 0; i < heroComponentDEs.length; i++) {
+            expect(heroComponentDEs[i].componentInstance.hero).toEqual(HEROES[i]);
+        }
     });
-    */
 });
