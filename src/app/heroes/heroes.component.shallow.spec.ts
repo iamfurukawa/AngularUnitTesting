@@ -6,20 +6,19 @@ import { of } from 'rxjs';
 import { Hero } from '../hero';
 import { By } from '@angular/platform-browser';
 
-// tslint:disable-block
+@Component({
+    selector: 'app-hero',
+    template: '<div></div>'
+})
+export class FakeHeroComponent {
+    @Input() hero: Hero;
+}
+
 describe('HeroesComponent (shallow tests)', () => {
-/*
+
     let fixture: ComponentFixture<HeroesComponent>;
     let mockHeroService;
     let HEROES;
-
-    @Component({
-        selector: 'app-hero',
-        template: '<div></div>'
-    })
-    export class FakeHeroComponent {
-        @Input() hero: Hero;
-    }
 
     beforeEach(() => {
         HEROES = [
@@ -56,5 +55,4 @@ describe('HeroesComponent (shallow tests)', () => {
 
         expect(fixture.debugElement.queryAll(By.css('li')).length).toBe(3);
     });
-    */
 });
